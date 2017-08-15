@@ -1,0 +1,561 @@
+{
+    "swagger" : "2.0",
+    "info" : {
+        "description" : "Move your app forward with the Republic API",
+        "version" : "1.0.0",
+        "title" : "Republic API"
+    },
+    "host" : "api.republic.com",
+    "basePath" : "/v1",
+    "schemes" : [ "https" ],
+    "produces" : [ "application/json" ],
+    "paths" : {
+        "/tours" : {
+            "get" : {
+                "tags" : [ "Tours" ],
+                "summary" : "All Tours",
+                "parameters" : [ {
+                    "name" : "sort",
+                    "in" : "query",
+                    "description" : "Sortable component of collection.",
+                    "required" : false,
+                    "type" : "string",
+                    "format" : "string"
+                }, {
+                    "name" : "limit",
+                    "in" : "query",
+                    "description" : "Limit component of collection.",
+                    "required" : false,
+                    "type" : "number",
+                    "format" : "integer"
+                }, {
+                    "name" : "offset",
+                    "in" : "query",
+                    "description" : "Offset component of collection (paginate).",
+                    "required" : false,
+                    "type" : "number",
+                    "format" : "integer"
+                } ],
+                "responses" : {
+                    "200" : {
+                        "description" : "An array of tours",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/Tour"
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "schema" : {
+                            "$ref" : "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/tour" : {
+            "get" : {
+                "tags" : [ "Tours" ],
+                "summary" : "Item Tour",
+                "parameters" : [ {
+                    "name" : "id",
+                    "in" : "query",
+                    "description" : "Unique identifier .",
+                    "required" : true,
+                    "type" : "number",
+                    "format" : "integer"
+                } ],
+                "responses" : {
+                    "200" : {
+                        "description" : "Item tour",
+                        "schema" : {
+                            "$ref" : "#/definitions/Tour"
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "schema" : {
+                            "$ref" : "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/places" : {
+            "get" : {
+                "tags" : [ "Places" ],
+                "summary" : "All Places",
+                "parameters" : [ {
+                    "name" : "sort",
+                    "in" : "query",
+                    "description" : "Sortable component of collection.",
+                    "required" : false,
+                    "type" : "string",
+                    "format" : "string"
+                }, {
+                    "name" : "limit",
+                    "in" : "query",
+                    "description" : "Limit component of collection.",
+                    "required" : false,
+                    "type" : "number",
+                    "format" : "integer"
+                }, {
+                    "name" : "offset",
+                    "in" : "query",
+                    "description" : "Offset component of collection (paginate).",
+                    "required" : false,
+                    "type" : "number",
+                    "format" : "integer"
+                } ],
+                "responses" : {
+                    "200" : {
+                        "description" : "An array of tours",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/Place"
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "schema" : {
+                            "$ref" : "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/place" : {
+            "get" : {
+                "tags" : [ "Tours" ],
+                "summary" : "Item Place",
+                "parameters" : [ {
+                    "name" : "id",
+                    "in" : "query",
+                    "description" : "Unique identifier .",
+                    "required" : true,
+                    "type" : "number",
+                    "format" : "integer"
+                } ],
+                "responses" : {
+                    "200" : {
+                        "description" : "Item place",
+                        "schema" : {
+                            "$ref" : "#/definitions/Place"
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "schema" : {
+                            "$ref" : "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/category/services" : {
+            "get" : {
+                "tags" : [ "Services" ],
+                "summary" : "All Services",
+                "parameters" : [ {
+                    "name" : "limit",
+                    "in" : "query",
+                    "description" : "Limit component of collection.",
+                    "required" : false,
+                    "type" : "number",
+                    "format" : "integer"
+                } ],
+                "responses" : {
+                    "200" : {
+                        "description" : "An array of Services",
+                        "schema" : {
+                            "type" : "array",
+                            "items" : {
+                                "$ref" : "#/definitions/Service"
+                            }
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "schema" : {
+                            "$ref" : "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/category/service" : {
+            "get" : {
+                "tags" : [ "Services" ],
+                "summary" : "Item Service",
+                "parameters" : [ {
+                    "name" : "id",
+                    "in" : "query",
+                    "description" : "Unique identifier .",
+                    "required" : true,
+                    "type" : "number",
+                    "format" : "integer"
+                } ],
+                "responses" : {
+                    "200" : {
+                        "description" : "Item service",
+                        "schema" : {
+                            "$ref" : "#/definitions/Service"
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "schema" : {
+                            "$ref" : "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/me" : {
+            "get" : {
+                "tags" : [ "User" ],
+                "summary" : "User Profile",
+                "description" : "The User Profile endpoint returns information about the user that has authorized with the application.",
+                "parameters" : [ ],
+                "responses" : {
+                    "200" : {
+                        "description" : "Profile information for a user",
+                        "schema" : {
+                            "$ref" : "#/definitions/Profile"
+                        }
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "schema" : {
+                            "$ref" : "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post" : {
+                "tags" : [ "User" ],
+                "summary" : "Update information",
+                "description" : "The User Profile endpoint returns information about the user that has authorized with the application.",
+                "parameters" : [ {
+                    "name" : "email",
+                    "in" : "query",
+                    "description" : "new email.",
+                    "required" : false,
+                    "type" : "string"
+                }, {
+                    "name" : "name",
+                    "in" : "query",
+                    "description" : "New name .",
+                    "required" : false,
+                    "type" : "string"
+                }, {
+                    "name" : "sourname",
+                    "in" : "query",
+                    "description" : "New sourname .",
+                    "required" : false,
+                    "type" : "string"
+                }, {
+                    "name" : "phone",
+                    "in" : "query",
+                    "description" : "New phone number .",
+                    "required" : false,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "200" : {
+                        "description" : "Updated"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "schema" : {
+                            "$ref" : "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/me/reset_password" : {
+            "post" : {
+                "tags" : [ "User" ],
+                "summary" : "Update password",
+                "description" : "The User Profile endpoint returns information about the user that has authorized with the application.",
+                "parameters" : [ {
+                    "name" : "old_password",
+                    "in" : "query",
+                    "description" : "Old password .",
+                    "required" : true,
+                    "type" : "string"
+                }, {
+                    "name" : "new_password",
+                    "in" : "query",
+                    "description" : "New password .",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "200" : {
+                        "description" : "Reset pasword"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "schema" : {
+                            "$ref" : "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/me/avatar" : {
+            "post" : {
+                "tags" : [ "User" ],
+                "summary" : "Update avatar",
+                "description" : "The User Profile endpoint returns information about the user that has authorized with the application.",
+                "parameters" : [ {
+                    "name" : "old_password",
+                    "in" : "query",
+                    "description" : "Old password .",
+                    "required" : true,
+                    "type" : "string"
+                }, {
+                    "name" : "new_password",
+                    "in" : "query",
+                    "description" : "New password .",
+                    "required" : true,
+                    "type" : "string"
+                } ],
+                "responses" : {
+                    "200" : {
+                        "description" : "Reset pasword"
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "schema" : {
+                            "$ref" : "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions" : {
+        "Rest" : {
+            "type" : "object",
+            "properties" : {
+                "id" : {
+                    "type" : "integer",
+                    "description" : "Unique identifier."
+                },
+                "title" : {
+                    "type" : "string",
+                    "description" : "Title of rest."
+                },
+                "ordering" : {
+                    "type" : "integer",
+                    "description" : "Number in  sort list."
+                }
+            }
+        },
+        "Service" : {
+            "type" : "object",
+            "properties" : {
+                "id" : {
+                    "type" : "integer",
+                    "description" : "Unique identifier."
+                },
+                "title" : {
+                    "type" : "string",
+                    "description" : "Title of service."
+                },
+                "img" : {
+                    "type" : "string",
+                    "description" : "icon."
+                }
+            }
+        },
+        "Point" : {
+            "type" : "object",
+            "properties" : {
+                "id" : {
+                    "type" : "integer",
+                    "description" : "Unique identifier."
+                },
+                "lat" : {
+                    "type" : "number",
+                    "description" : "latitude."
+                },
+                "lng" : {
+                    "type" : "number",
+                    "description" : "longitude."
+                },
+                "city" : {
+                    "$ref" : "#/definitions/City"
+                }
+            }
+        },
+        "City" : {
+            "type" : "object",
+            "properties" : {
+                "id" : {
+                    "type" : "integer",
+                    "description" : "Unique identifier."
+                },
+                "lat" : {
+                    "type" : "number",
+                    "description" : "latitude."
+                },
+                "lng" : {
+                    "type" : "number",
+                    "description" : "12.333."
+                },
+                "title" : {
+                    "type" : "string",
+                    "description" : "Title town."
+                }
+            }
+        },
+        "Tour" : {
+            "type" : "object",
+            "properties" : {
+                "id" : {
+                    "type" : "integer",
+                    "description" : "Unique identifier ."
+                },
+                "description" : {
+                    "type" : "string",
+                    "description" : "Description of tour."
+                },
+                "title" : {
+                    "type" : "string",
+                    "description" : "Display name of tour."
+                },
+                "title_desc" : {
+                    "type" : "string",
+                    "description" : "Short description."
+                },
+                "points" : {
+                    "type" : "array",
+                    "items" : {
+                        "$ref" : "#/definitions/Point"
+                    }
+                },
+                "type_rests" : {
+                    "type" : "array",
+                    "items" : {
+                        "$ref" : "#/definitions/Rest"
+                    }
+                },
+                "price" : {
+                    "type" : "integer",
+                    "description" : "Price of tour. For example, 400."
+                },
+                "time_start" : {
+                    "type" : "string",
+                    "format" : "date-time",
+                    "description" : "Time start of tour. For example, 2017-02-23 15:16:40."
+                },
+                "time_end" : {
+                    "type" : "string",
+                    "format" : "date-time",
+                    "description" : "Time end of tour. For example, 2017-02-24 15:16:40."
+                },
+                "img" : {
+                    "type" : "string",
+                    "description" : "Image URL representing the product."
+                }
+            }
+        },
+        "Place" : {
+            "type" : "object",
+            "properties" : {
+                "id" : {
+                    "type" : "integer",
+                    "description" : "Unique identifier ."
+                },
+                "description" : {
+                    "type" : "string",
+                    "description" : "Description of place."
+                },
+                "title" : {
+                    "type" : "string",
+                    "description" : "Display name of place."
+                },
+                "desc" : {
+                    "type" : "string",
+                    "description" : "Short description."
+                },
+                "city" : {
+                    "$ref" : "#/definitions/City"
+                },
+                "lat" : {
+                    "type" : "integer",
+                    "description" : "latitude."
+                },
+                "lng" : {
+                    "type" : "integer",
+                    "description" : "longitude."
+                },
+                "img" : {
+                    "type" : "string",
+                    "description" : "Image URL representing the place."
+                },
+                "secure" : {
+                    "type" : "string",
+                    "description" : "Description of secure place."
+                },
+                "warning" : {
+                    "type" : "string",
+                    "description" : "Description of warning place."
+                },
+                "way" : {
+                    "type" : "string",
+                    "description" : "Description of way place."
+                }
+            }
+        },
+        "Profile" : {
+            "type" : "object",
+            "properties" : {
+                "name" : {
+                    "type" : "string"
+                },
+                "sourname" : {
+                    "type" : "string"
+                },
+                "email" : {
+                    "type" : "string"
+                },
+                "phone" : {
+                    "type" : "string"
+                },
+                "img" : {
+                    "type" : "string",
+                    "description" : "Image URL."
+                },
+                "password" : {
+                    "type" : "string",
+                    "format" : "password",
+                    "description" : "password encoding in md5."
+                }
+            }
+        },
+        "Error" : {
+            "type" : "object",
+            "properties" : {
+                "code" : {
+                    "type" : "integer",
+                    "format" : "int32"
+                },
+                "message" : {
+                    "type" : "string"
+                },
+                "fields" : {
+                    "type" : "string"
+                }
+            }
+        }
+    }
+}
