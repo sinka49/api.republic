@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'sourname'
     ];
 
     /**
@@ -24,21 +24,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'remember_token',
+        'remember_token',  'created_at', 'updated_at'
     ];
 
-    public function generateAuthToken(Application $app)
-    {
-        $jwt = JWT::encode([
-            'iss' => $
 
-
-        pp->key,
-            'sub' => $this->email,
-            'iat' => time(),
-            'jti' => sha1($app->key.$this->email.time()),
-        ], 'w5yuCV2mQDVTGmn3');
-
-        return $jwt;
-    }
 }

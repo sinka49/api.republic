@@ -84,7 +84,8 @@
 
                 <div class="links">
                     <a href="http://api.republic05.ru/api/documentation">Documentation</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="/api/updates">Updates</a>
+                    <a href="https://github.com/sinka49/api.republic">GitHub</a>
                 </div>
             </div>
         </div>

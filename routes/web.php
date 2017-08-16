@@ -20,19 +20,25 @@ $api->version('v1', function ($api) {
     $api->get('category/service', 'App\Http\Controllers\Api\ServiceController@show');
 
 
-    $api->post('/auth/app', 'Api\AuthController@authenticateApp');
 
-    // Аутентификация пользователей...
-    $api->post('/auth/user', 'Api\AuthController@authenticateUser')->middleware('auth.api.app');
-    $api->post('/auth/user/logout', 'Api\AuthController@logoutUser')->middleware('auth.api.user');
-
-    // Тестовые  маршруты
-    $api->get('/application-data', 'Api\HomeController@appData')->middleware('auth.api.app');
-    $api->get('/user-data', 'Api\HomeController@userData');
+    $api->post('login', 'App\Http\Controllers\Api\AuthController@login');
+    $api->post('signup', 'App\Http\Controllers\Api\AuthController@signup');
+    $api->group(['middleware' => ['jwt.auth', 'jwt.refresh']], function($api) {
+        $api->post('logout', 'App\Http\Controllers\Api\AuthController@logout');
+        $api->get('test', function(){
+            return response()->json(['foo'=>'bar']);
+        });
+        $api->get('me', 'App\Http\Controllers\Api\AuthController@getAuthenticatedUser');
+        $api->post('me', 'App\Http\Controllers\Api\ProfileController@me');
+        $api->post('me/reset_password', 'App\Http\Controllers\Api\ProfileController@reset_pass');
+        $api->post('me/avatar', 'App\Http\Controllers\Api\ProfileController@avatar');
+    });
 });
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::get('/api/updates', function () {
+    return view('updates');
+});

@@ -41,7 +41,7 @@ class TourController extends ApiController
             }
         }
 
-        return $tours;
+        return response()->json($tours);
     }
 
     public function store(Request $request)
@@ -65,7 +65,7 @@ class TourController extends ApiController
             $temp = $dot->city;
             $dot->city = City::find($temp);
         }
-        return $tour;
+        return  response()->json($tour);
     }
 
     public function update(Request $request, Tour $tour)

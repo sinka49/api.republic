@@ -229,12 +229,98 @@
                 }
             }
         },
+        "/signup" : {
+            "post" : {
+                "tags" : [ "User" ],
+                "summary" : "Sign Up",
+                "parameters" : [ {
+                    "name" : "email",
+                    "in" : "query",
+                    "description" : "new email. unique in user",
+                    "required" : true,
+                    "type" : "string"
+                }, {
+                    "name" : "name",
+                    "in" : "query",
+                    "description" : "New name .",
+                    "required" : true,
+                    "type" : "string"
+                }, {
+                    "name" : "sourname",
+                    "in" : "query",
+                    "description" : "New sourname .",
+                    "required" : false,
+                    "type" : "string"
+                }, {
+                    "name" : "phone",
+                    "in" : "query",
+                    "description" : "New phone number. unique in user",
+                    "required" : false,
+                    "type" : "string"
+                }, {
+                    "name" : "password",
+                    "in" : "query",
+                    "description" : "password min 6 symbols.",
+                    "required" : true,
+                    "type" : "string"
+                }],
+                "responses" : {
+                    "200" : {
+                        "description" : "[token]"
+
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "schema" : {
+                            "$ref" : "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/login" : {
+            "post" : {
+                "tags" : [ "User" ],
+                "summary" : "Sign In",
+                "parameters" : [ {
+                    "name" : "email",
+                    "in" : "query",
+                    "description" : "user login",
+                    "required" : true,
+                    "type" : "string"
+                }, {
+                    "name" : "password",
+                    "in" : "query",
+                    "description" : "password .",
+                    "required" : true,
+                    "type" : "string"
+                }],
+                "responses" : {
+                    "200" : {
+                        "description" : "[token]"
+
+                    },
+                    "default" : {
+                        "description" : "Unexpected error",
+                        "schema" : {
+                            "$ref" : "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/me" : {
             "get" : {
                 "tags" : [ "User" ],
                 "summary" : "User Profile",
                 "description" : "The User Profile endpoint returns information about the user that has authorized with the application.",
-                "parameters" : [ ],
+                "parameters" : [ {
+                    "name" : "token",
+                    "in" : "query",
+                    "description" : "Bearer token",
+                    "required" : true,
+                    "type" : "string"
+                }],
                 "responses" : {
                     "200" : {
                         "description" : "Profile information for a user",
@@ -278,10 +364,20 @@
                     "description" : "New phone number .",
                     "required" : false,
                     "type" : "string"
+                },{
+                    "name" : "token",
+                    "in" : "query",
+                    "description" : "Bearer token",
+                    "required" : true,
+                    "type" : "string"
                 } ],
                 "responses" : {
                     "200" : {
-                        "description" : "Updated"
+                        "description" : "User profile",
+                        "schema" : {
+                            "$ref" : "#/definitions/Profile"
+
+                        }
                     },
                     "default" : {
                         "description" : "Unexpected error",
@@ -309,10 +405,17 @@
                     "description" : "New password .",
                     "required" : true,
                     "type" : "string"
+                },{
+                    "name" : "token",
+                    "in" : "query",
+                    "description" : "Bearer token",
+                    "required" : true,
+                    "type" : "string"
                 } ],
                 "responses" : {
                     "200" : {
-                        "description" : "Reset pasword"
+                        "description" : "Updated"
+
                     },
                     "default" : {
                         "description" : "Unexpected error",
@@ -329,21 +432,24 @@
                 "summary" : "Update avatar",
                 "description" : "The User Profile endpoint returns information about the user that has authorized with the application.",
                 "parameters" : [ {
-                    "name" : "old_password",
-                    "in" : "query",
-                    "description" : "Old password .",
+                    "name" : "img",
+                    "in" : "formData",
+                    "description" : "File Image Avatar",
                     "required" : true,
-                    "type" : "string"
-                }, {
-                    "name" : "new_password",
+                    "type" : "file"
+                },{
+                    "name" : "token",
                     "in" : "query",
-                    "description" : "New password .",
+                    "description" : "Bearer token",
                     "required" : true,
                     "type" : "string"
                 } ],
                 "responses" : {
                     "200" : {
-                        "description" : "Reset pasword"
+                        "description" : "Updated",
+                        "schema" : {
+                            "$ref" : "#/definitions/Profile"
+                        }
                     },
                     "default" : {
                         "description" : "Unexpected error",
@@ -535,6 +641,9 @@
         "Profile" : {
             "type" : "object",
             "properties" : {
+                "id" : {
+                    "type" : "integer"
+                },
                 "name" : {
                     "type" : "string"
                 },
@@ -550,12 +659,8 @@
                 "img" : {
                     "type" : "string",
                     "description" : "Image URL."
-                },
-                "password" : {
-                    "type" : "string",
-                    "format" : "password",
-                    "description" : "password encoding in md5."
                 }
+
             }
         },
         "Tour_image" : {
